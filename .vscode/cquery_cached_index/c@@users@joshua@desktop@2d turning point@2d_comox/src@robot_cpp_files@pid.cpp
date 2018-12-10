@@ -54,10 +54,12 @@ int PID::output(double current, int max_out) {
     else
       integral = 0;
   }
-  else if (error > 0)
-    integral = const_integral_value;
-  else if (error < 0)
-    integral = -const_integral_value;
+  else {
+    if (error > 0)
+      integral = const_integral_value;
+    else if (error < 0)
+      integral = -const_integral_value;
+  }
 
   derivative = (error - past_error) / time_interval;
 
