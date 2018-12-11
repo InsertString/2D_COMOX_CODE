@@ -5,6 +5,8 @@
 
 #include "main.h"
 
+
+pros::Controller master(pros::E_CONTROLLER_MASTER);
 pros::Motor drive_LF(16);
 pros::Motor drive_RF(18);
 pros::Motor drive_LB(17);

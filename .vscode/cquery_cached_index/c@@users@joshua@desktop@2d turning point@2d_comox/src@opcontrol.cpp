@@ -14,9 +14,12 @@
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	
-	while (true) {
 
+	while (true) {
+		drive_LF = master.get_analog(ANALOG_LEFT_Y);
+		drive_LB = -master.get_analog(ANALOG_LEFT_Y);
+		drive_RF = master.get_analog(ANALOG_RIGHT_Y);
+		drive_RB = -master.get_analog(ANALOG_RIGHT_Y);
 		pros::delay(20);
 	}
 }

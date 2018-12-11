@@ -78,4 +78,13 @@ void opcontrol(void);
 //#include <iostream>
 #endif
 
+
+extern pros::Controller master;
+
+extern pros::Motor drive_LF;
+extern pros::Motor drive_RF;
+extern pros::Motor drive_LB;
+extern pros::Motor drive_RB;
+
+
 #endif  // _PROS_MAIN_H_
