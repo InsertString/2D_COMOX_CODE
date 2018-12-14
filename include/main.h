@@ -86,5 +86,7 @@ extern pros::Motor drive_RF;
 extern pros::Motor drive_LB;
 extern pros::Motor drive_RB;
 
+extern pros::Motor intake;
+
 
 #endif  // _PROS_MAIN_H_

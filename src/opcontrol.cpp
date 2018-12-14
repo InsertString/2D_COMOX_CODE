@@ -20,6 +20,17 @@ void opcontrol() {
 		drive_LB = master.get_analog(ANALOG_LEFT_Y);
 		drive_RF = master.get_analog(ANALOG_RIGHT_Y);
 		drive_RB = -master.get_analog(ANALOG_RIGHT_Y);
+
+		if (master.get_digital(DIGITAL_L1)) {
+			intake = 127;
+		}
+		else if (master.get_digital(DIGITAL_L2)) {
+			intake = -127;
+		}
+		else
+			intake = 0;
+
+		
 		pros::delay(20);
 	}
 }
