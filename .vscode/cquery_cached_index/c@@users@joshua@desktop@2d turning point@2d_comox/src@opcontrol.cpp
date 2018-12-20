@@ -30,6 +30,8 @@ void opcontrol() {
 		else
 			intake = 0;
 
+
+		/*
 		if (master.get_digital(DIGITAL_R1) && cat_down.get_value() == false) {
 			cat = -127;
 		}
@@ -41,6 +43,17 @@ void opcontrol() {
 		}
 		else {
 			cat = 0;
+		}
+		*/
+
+		if (master.get_digital(DIGITAL_R1) && cat_down.get_value() == true) {
+			cat = -127;
+		}
+		else if (cat_down.get_value() == true) {
+			cat = -5;
+		}
+		else {
+			cat = -127;
 		}
 
 
