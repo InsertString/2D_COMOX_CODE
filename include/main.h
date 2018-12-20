@@ -88,6 +88,7 @@ extern pros::Motor drive_RB;
 
 extern pros::Motor intake;
 extern pros::Motor cat;
+extern pros::ADIDigitalIn cat_down;
 
 
 #endif  // _PROS_MAIN_H_

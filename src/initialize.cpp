@@ -17,6 +17,7 @@ pros::Motor cat(11);
 pros::Motor intake(20);
 
 pros::Motor cap_scorer(13);
+pros::ADIDigitalIn cat_down(3);
 
 
 void initialize() {

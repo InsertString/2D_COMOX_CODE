@@ -30,7 +30,20 @@ void opcontrol() {
 		else
 			intake = 0;
 
-		
+		if (master.get_digital(DIGITAL_R1) && cat_down.get_value() == false) {
+			cat = -127;
+		}
+		else if (cat_down.get_value() == true && master.get_digital(DIGITAL_R1)) {
+			cat = -10;
+		}
+		else if (cat_down.get_value() == true && master.get_digital(DIGITAL_R2) == 0) {
+			cat = -127;
+		}
+		else {
+			cat = 0;
+		}
+
+
 		pros::delay(20);
 	}
 }
