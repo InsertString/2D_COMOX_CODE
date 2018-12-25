@@ -31,12 +31,12 @@ void opcontrol() {
 			intake = 0;
 
 
-		/*
+
 		if (master.get_digital(DIGITAL_R1) && cat_down.get_value() == false) {
 			cat = -127;
 		}
 		else if (cat_down.get_value() == true && master.get_digital(DIGITAL_R1)) {
-			cat = -10;
+			cat = 0;
 		}
 		else if (cat_down.get_value() == true && master.get_digital(DIGITAL_R2) == 0) {
 			cat = -127;
@@ -44,18 +44,19 @@ void opcontrol() {
 		else {
 			cat = 0;
 		}
-		*/
 
+		/*
 		if (master.get_digital(DIGITAL_R1) && cat_down.get_value() == true) {
 			cat = -127;
 		}
 		else if (cat_down.get_value() == true) {
-			cat = -5;
+			cat = 0;
 		}
 		else {
 			cat = -127;
 		}
 
+		*/
 
 		pros::delay(20);
 	}
