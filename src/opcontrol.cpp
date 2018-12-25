@@ -14,7 +14,7 @@
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-
+	int i;
 	while (true) {
 		drive_LF = -master.get_analog(ANALOG_LEFT_Y);
 		drive_LB = master.get_analog(ANALOG_LEFT_Y);
