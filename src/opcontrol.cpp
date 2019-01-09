@@ -8,29 +8,35 @@ void opcontrol() {
 		drive_RF = master.get_analog(ANALOG_RIGHT_Y);
 		drive_RB = -master.get_analog(ANALOG_RIGHT_Y);
 
+		/*
 		if (master.get_digital(DIGITAL_L1)) {
-			intake = 127;
+			intake = -127;
 		}
 		else if (master.get_digital(DIGITAL_L2)) {
-			intake = -127;
+			intake = 127;
 		}
 		else
 			intake = 0;
 
-
-
-		if (master.get_digital(DIGITAL_R1) && cat_down.get_value() == false) {
+		if (master.get_digital(DIGITAL_R1) && cat_pot.get_value() < 1450) {
 			cat = -127;
 		}
-		else if (cat_down.get_value() == true && master.get_digital(DIGITAL_R1)) {
+		else if (master.get_digital(DIGITAL_R1) && cat_pot.get_value() > 1440) {
 			cat = -10;
 		}
-		else if (cat_down.get_value() == true && master.get_digital(DIGITAL_R2) == 0) {
+		else if (!master.get_digital(DIGITAL_R1) && cat_pot.get_value() > 1400) {
 			cat = -127;
 		}
 		else {
 			cat = 0;
 		}
+		*/
+
+		ball_system.drive();
+
+
+
+		pros::lcd::print(0, "cat_pot %d\n", cat_pot.get_value());
 
 		pros::delay(20);
 	}

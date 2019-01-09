@@ -35,6 +35,7 @@
 #define PROS_USE_LITERALS
 
 #include "api.h"
+#include "robot_includes/robot_includes.h"
 
 /**
  * You should add more #includes here
@@ -88,7 +89,8 @@ extern pros::Motor drive_RB;
 
 extern pros::Motor intake;
 extern pros::Motor cat;
-extern pros::ADIDigitalIn cat_down;
+extern pros::ADIAnalogIn cat_pot;
 
+extern Ball_System ball_system;
 
 #endif  // _PROS_MAIN_H_

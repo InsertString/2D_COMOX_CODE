@@ -8,6 +8,12 @@ enum Auto_Function_Var {
   FLAGGED
 };
 
+enum Cat_Positions {
+  LOAD,
+  IDLE,
+  FIRE
+};
+
 
 class Chassis {
 public:
@@ -20,12 +26,16 @@ public:
 
 class Ball_System {
 public:
+  Ball_System();
   void setIntakePower(int power);
 
   void setCatpower(int power);
-  void setCatPosition(int target);
+  void setCatPosition();
+  Cat_Positions current_cat_position();
 
   void drive();
+private:
+  Cat_Positions target;
 };
 
 #endif

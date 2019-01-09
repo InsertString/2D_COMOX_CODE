@@ -3,5 +3,6 @@
 
 #include "pid.h"
 #include "timing.h"
+#include "robot_classes.h"
 
 #endif
