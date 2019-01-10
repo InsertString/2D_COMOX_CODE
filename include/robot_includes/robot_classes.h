@@ -2,6 +2,10 @@
 #define _ROBOT_CLASSES_H_
 
 
+#define CAT_LOADING_MAX_VAL 1550
+#define CAT_LOADING_MIN_VAL 1500
+
+
 enum Auto_Function_Var {
   COMPLETE,
   INCOMPLETE,
