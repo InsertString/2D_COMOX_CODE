@@ -3,12 +3,12 @@
 void opcontrol() {
 	int i;
 	while (true) {
-		drive_LF = -master.get_analog(ANALOG_LEFT_Y);
-		drive_LB = master.get_analog(ANALOG_LEFT_Y);
-		drive_RF = master.get_analog(ANALOG_RIGHT_Y);
-		drive_RB = -master.get_analog(ANALOG_RIGHT_Y);
+		drive_RF = master.get_analog(ANALOG_LEFT_Y);
+		drive_RB = master.get_analog(ANALOG_LEFT_Y);
+		drive_LF = -master.get_analog(ANALOG_RIGHT_Y);
+		drive_LB = -master.get_analog(ANALOG_RIGHT_Y);
 
-		/*
+
 		if (master.get_digital(DIGITAL_L1)) {
 			intake = -127;
 		}
@@ -21,18 +21,18 @@ void opcontrol() {
 		if (master.get_digital(DIGITAL_R1) && cat_pot.get_value() < 1450) {
 			cat = -127;
 		}
-		else if (master.get_digital(DIGITAL_R1) && cat_pot.get_value() > 1440) {
-			cat = -10;
+		else if (master.get_digital(DIGITAL_R1) && cat_pot.get_value() > 1450) {
+			cat = -7;
 		}
-		else if (!master.get_digital(DIGITAL_R1) && cat_pot.get_value() > 1400) {
+		else if (!master.get_digital(DIGITAL_R1) && cat_pot.get_value() > 1300) {
 			cat = -127;
 		}
 		else {
 			cat = 0;
 		}
-		*/
 
-		ball_system.drive();
+
+		//ball_system.drive();
 
 
 

@@ -6,9 +6,9 @@
 #include "main.h"
 
 #define LEFT_FRONT_MOTOR 16
-#define LEFT_BACK_MOTOR 17
+#define LEFT_BACK_MOTOR 15
 #define RIGHT_FRONT_MOTOR 18
-#define RIGHT_BACK_MOTOR 19
+#define RIGHT_BACK_MOTOR 14
 #define A 1
 #define B 2
 #define C 3
@@ -33,7 +33,7 @@ Ball_System ball_system;
 
 void initialize() {
 	pros::lcd::initialize();
-	cat.set_brake_mode(MOTOR_BRAKE_COAST);
+	cat.set_brake_mode(MOTOR_BRAKE_BRAKE);
 	intake.set_brake_mode(MOTOR_BRAKE_COAST);
 }
 
