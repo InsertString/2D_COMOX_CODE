@@ -9,6 +9,9 @@
 #define LEFT_BACK_MOTOR 15
 #define RIGHT_FRONT_MOTOR 18
 #define RIGHT_BACK_MOTOR 14
+#define CATAPULT_MOTOR 11
+#define INTAKE_MOTOR 20
+#define CHAINBAR_MOTOR 13
 #define A 1
 #define B 2
 #define C 3
@@ -22,11 +25,11 @@ pros::Motor drive_LB(LEFT_BACK_MOTOR);
 pros::Motor drive_RB(RIGHT_BACK_MOTOR);
 pros::ADIGyro gyro(C);
 
-pros::Motor cat(11);
-pros::Motor intake(20);
+pros::Motor cat(CATAPULT_MOTOR);
+pros::Motor intake(INTAKE_MOTOR);
 pros::ADIAnalogIn cat_pot(D);
 
-pros::Motor cap_scorer(13);
+pros::Motor cap_scorer(CHAINBAR_MOTOR);
 
 Ball_System ball_system;
 
@@ -35,6 +38,11 @@ void initialize() {
 	pros::lcd::initialize();
 	cat.set_brake_mode(MOTOR_BRAKE_BRAKE);
 	intake.set_brake_mode(MOTOR_BRAKE_COAST);
+
+	drive_RF.set_brake_mode(MOTOR_BRAKE_BRAKE);
+	drive_LF.set_brake_mode(MOTOR_BRAKE_BRAKE);
+	drive_RB.set_brake_mode(MOTOR_BRAKE_BRAKE);
+	drive_LB.set_brake_mode(MOTOR_BRAKE_BRAKE);
 }
 
 void disabled() {}
