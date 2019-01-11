@@ -16,7 +16,8 @@ void opcontrol() {
 
 		ball_system.drive();
 
-		pros::lcd::print(0, "cat_pot %d\n", cat_pot.get_value());
+		pros::lcd::print(0, "cat_pot %d", cat_pot.get_value());
+		pros::lcd::print(1, "cat temp : %f", cat.get_temperature());
 
 		pros::delay(20);
 	}

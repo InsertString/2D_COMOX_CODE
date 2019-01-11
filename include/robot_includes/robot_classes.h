@@ -2,8 +2,8 @@
 #define _ROBOT_CLASSES_H_
 
 
-#define CAT_LOADING_MAX_VAL 1550
-#define CAT_LOADING_MIN_VAL 1500
+#define CAT_LOADING_MAX_VAL 1500
+#define CAT_LOADING_MIN_VAL 1490
 
 
 enum Auto_Function_Var {
@@ -40,6 +40,7 @@ public:
   void drive();
 private:
   Cat_Positions target;
+  int Cat_target;
 };
 
 #endif

@@ -49,7 +49,7 @@ void Ball_System::setCatPosition() {
     case LOAD :
     switch (current_cat_position()) {
       case LOAD :
-      setCatpower(7);
+      setCatpower(0);
       break;
       case IDLE :
       setCatpower(127);
@@ -80,22 +80,32 @@ void Ball_System::setCatPosition() {
 
 
 
-
-
+int a = 0;
 void Ball_System::drive() {
-  setCatPosition();
+  //setCatPosition();
+  Cat_target = 1590;
+  int power = (Cat_target - cat_pot.get_value()) * 1;
 
   if (master.get_digital(DIGITAL_R2)) {
-    target = IDLE;
+    setCatpower(0);
+    a = 1;
   }
   else if (master.get_digital(DIGITAL_R1)) {
-    target = LOAD;
-  }
-  else if (!master.get_digital(DIGITAL_R1) && target == LOAD) {
-    target = FIRE;
-  }
+    a = 2;
+    if (cat_pot.get_value() < 1550) {
+      setCatpower(127);
 
-
+    }
+    else {
+      setCatpower(0);
+    }
+  }
+  else if (!master.get_digital(DIGITAL_R1) && cat_pot.get_value() > 1000 && a == 2) {
+    setCatpower(127);
+  }
+  else {
+    setCatpower(0);
+  }
 
 
   if (master.get_digital(DIGITAL_L1) && master.get_digital(DIGITAL_R1)) {
