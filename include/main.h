@@ -91,6 +91,10 @@ extern pros::Motor intake;
 extern pros::Motor cat;
 extern pros::ADIAnalogIn cat_pot;
 
+extern pros::Motor flipper;
+extern pros::Motor cBar;
+
 extern Ball_System ball_system;
+extern Lift_Systems lift;
 
 #endif  // _PROS_MAIN_H_

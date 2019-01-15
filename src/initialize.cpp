@@ -29,9 +29,13 @@ pros::Motor cat(CATAPULT_MOTOR);
 pros::Motor intake(INTAKE_MOTOR);
 pros::ADIAnalogIn cat_pot(D);
 
+pros::Motor flipper(1);
+pros::Motor cBar(13);
+
 pros::Motor cap_scorer(CHAINBAR_MOTOR);
 
 Ball_System ball_system;
+Lift_Systems lift;
 
 
 void initialize() {
@@ -43,6 +47,9 @@ void initialize() {
 	drive_LF.set_brake_mode(MOTOR_BRAKE_BRAKE);
 	drive_RB.set_brake_mode(MOTOR_BRAKE_BRAKE);
 	drive_LB.set_brake_mode(MOTOR_BRAKE_BRAKE);
+
+	flipper.set_brake_mode(MOTOR_BRAKE_BRAKE);
+	cBar.set_brake_mode(MOTOR_BRAKE_BRAKE);
 }
 
 void disabled() {}

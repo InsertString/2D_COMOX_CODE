@@ -90,17 +90,17 @@ void Ball_System::drive() {
     setCatpower(0);
     a = 1;
   }
-  else if (master.get_digital(DIGITAL_R1)) {
+  else if (!master.get_digital(DIGITAL_R1)) {
     a = 2;
-    if (cat_pot.get_value() < 1550) {
-      setCatpower(127);
+    if (cat_pot.get_value() < 1456) {
+      setCatpower(power);
 
     }
     else {
-      setCatpower(0);
+      setCatpower(-5);
     }
   }
-  else if (!master.get_digital(DIGITAL_R1) && cat_pot.get_value() > 1000 && a == 2) {
+  else if (master.get_digital(DIGITAL_R1) && cat_pot.get_value() > 1000 && a == 2) {
     setCatpower(127);
   }
   else {
@@ -108,7 +108,7 @@ void Ball_System::drive() {
   }
 
 
-  if (master.get_digital(DIGITAL_L1) && master.get_digital(DIGITAL_R1)) {
+  if (master.get_digital(DIGITAL_L1) && cat_pot.get_value() > 1200) {
     setIntakePower(127);
   }
   else if (master.get_digital(DIGITAL_L2)) {

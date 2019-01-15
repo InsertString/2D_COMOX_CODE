@@ -1,3 +1,6 @@
+#include "robot_includes/pid.h"
+
+
 #ifndef _ROBOT_CLASSES_H_
 #define _ROBOT_CLASSES_H_
 
@@ -25,6 +28,21 @@ public:
   void setRightPower(int power);
 
   void drive();
+};
+
+
+class Lift_Systems {
+public:
+  Lift_Systems();
+  void setFlipperPower(int power);
+  void setCBarPower(int power);
+  PID CBar_pid;
+  int button_pressed();
+
+  void drive();
+private:
+  int curr_system;
+  int flipper_state;
 };
 
 
