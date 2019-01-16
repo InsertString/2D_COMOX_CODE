@@ -9,6 +9,10 @@
 #define RIGHT 4
 #define NONE 0
 
+#define SCORING -1950
+#define LIFTING -4150
+#define GRABBING -280
+
 Lift_Systems::Lift_Systems() {
   curr_system = FLIPPER;
   flipper_state = UP;
@@ -66,10 +70,10 @@ void Lift_Systems::drive() {
     break;
     case LEFT :
     if (curr_system == CHAINBAR) {
-      //set cbar to pick up height
+      cBar.move_absolute(LIFTING, 70);
     }
     else if (curr_system == FLIPPER) {
-      //set flipper to medium height
+      flipper.move_absolute(GRABBING, 200);
     }
     break;
     case DOWN :
@@ -83,7 +87,7 @@ void Lift_Systems::drive() {
     break;
     case RIGHT :
     if (curr_system == CHAINBAR) {
-      //set cbar to scoring position
+      cBar.move_absolute(SCORING, 200);
     }
     else if (curr_system == FLIPPER) {
       setFlipperPower(0);

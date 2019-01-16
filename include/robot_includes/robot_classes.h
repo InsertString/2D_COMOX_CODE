@@ -24,10 +24,13 @@ enum Cat_Positions {
 
 class Chassis {
 public:
+  Chassis();
   void setLeftPower(int power);
   void setRightPower(int power);
 
   void drive();
+private:
+  int direction;
 };
 
 
@@ -40,8 +43,9 @@ public:
   int button_pressed();
 
   void drive();
-private:
+
   int curr_system;
+private:
   int flipper_state;
 };
 

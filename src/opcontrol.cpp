@@ -4,71 +4,34 @@ void opcontrol() {
 	int l = -1;
 	int r = 1;
 	int direction = 0;
+	cBar.tare_position();
+	flipper.tare_position();
+	int count = 0;
+	int a = 1;
+
 	while (true) {
-		/*
-		drive_RF = master.get_analog(ANALOG_LEFT_Y) * r;
-		drive_RB = master.get_analog(ANALOG_LEFT_Y) * r;
-		drive_LF = master.get_analog(ANALOG_RIGHT_Y) * l;
-		drive_LB = master.get_analog(ANALOG_RIGHT_Y) * l;
-
-		if (master.get_digital_new_press(DIGITAL_Y)) {
-			l *= -1;
-			r *= -1;
-		}
-		*/
-
-		if (master.get_digital_new_press(DIGITAL_Y)) {
-			if (direction == 1) {
-				direction = 0;
+		if (!(count % 1)) {
+      if (lift.curr_system == 1 && a == 0) {
+				master.print(0, 0, "SYSTEM : [CBAR]");
+				a = 1;
 			}
-			else {
-				direction = 1;
+			else if (lift.curr_system == 2 && a == 1) {
+				master.print(0, 0, "SYSTEM : [FLIP]");
+				a = 0;
 			}
-		}
+    }
+    count++;
 
-/*
-		if (master.get_digital(DIGITAL_X)) {
-			flipper = 127;
-		}
-		else if (master.get_digital(DIGITAL_B)) {
-			flipper = -127;
-		}
-		else {
-			flipper = 0;
-		}
-
-		if (master.get_digital(DIGITAL_UP)) {
-			cBar = 127;
-		}
-		else if (master.get_digital(DIGITAL_DOWN)) {
-			cBar = -127;
-		}
-		else {
-			cBar = 0;
-		}
-*/
+		chassis.drive();
 
 		lift.drive();
-
-		if (direction == 1) {
-			drive_RF = master.get_analog(ANALOG_LEFT_Y);
-			drive_RB = master.get_analog(ANALOG_LEFT_Y);
-			drive_LF = -master.get_analog(ANALOG_RIGHT_Y);
-			drive_LB = -master.get_analog(ANALOG_RIGHT_Y);
-		}
-		else if (direction == 0) {
-			drive_LF = master.get_analog(ANALOG_LEFT_Y);
-			drive_LB = master.get_analog(ANALOG_LEFT_Y);
-			drive_RF = -master.get_analog(ANALOG_RIGHT_Y);
-			drive_RB = -master.get_analog(ANALOG_RIGHT_Y);
-		}
-
-
 
 		ball_system.drive();
 
 		pros::lcd::print(0, "cat_pot %d", cat_pot.get_value());
 		pros::lcd::print(1, "cat temp : %f", cat.get_temperature());
+		pros::lcd::print(2, "cBar position : %f", cBar.get_position());
+		pros::lcd::print(3, "flipper : %f", flipper.get_position());
 
 		pros::delay(20);
 	}

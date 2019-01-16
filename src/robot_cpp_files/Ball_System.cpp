@@ -80,7 +80,8 @@ void Ball_System::setCatPosition() {
 
 
 
-int a = 0;
+int a = 2;
+int b = 0;
 void Ball_System::drive() {
   //setCatPosition();
   Cat_target = 1590;
@@ -89,19 +90,21 @@ void Ball_System::drive() {
   if (master.get_digital(DIGITAL_R2)) {
     setCatpower(0);
     a = 1;
+    b = 1;
   }
   else if (!master.get_digital(DIGITAL_R1)) {
     a = 2;
-    if (cat_pot.get_value() < 1456) {
+    if (cat_pot.get_value() < 1449 && b == 1) {
       setCatpower(power);
-
     }
     else {
-      setCatpower(-5);
+      setCatpower(0);
+      b = 0;
     }
   }
   else if (master.get_digital(DIGITAL_R1) && cat_pot.get_value() > 1000 && a == 2) {
     setCatpower(127);
+    b = 1;
   }
   else {
     setCatpower(0);

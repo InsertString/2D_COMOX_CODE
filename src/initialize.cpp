@@ -29,13 +29,14 @@ pros::Motor cat(CATAPULT_MOTOR);
 pros::Motor intake(INTAKE_MOTOR);
 pros::ADIAnalogIn cat_pot(D);
 
-pros::Motor flipper(1);
+pros::Motor flipper(12);
 pros::Motor cBar(13);
 
 pros::Motor cap_scorer(CHAINBAR_MOTOR);
 
 Ball_System ball_system;
 Lift_Systems lift;
+Chassis chassis;
 
 
 void initialize() {

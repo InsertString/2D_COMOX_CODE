@@ -96,5 +96,6 @@ extern pros::Motor cBar;
 
 extern Ball_System ball_system;
 extern Lift_Systems lift;
+extern Chassis chassis;
 
 #endif  // _PROS_MAIN_H_
