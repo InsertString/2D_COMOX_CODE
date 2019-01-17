@@ -98,4 +98,6 @@ extern Ball_System ball_system;
 extern Lift_Systems lift;
 extern Chassis chassis;
 
+extern pros::ADIGyro gyro;
+
 #endif  // _PROS_MAIN_H_

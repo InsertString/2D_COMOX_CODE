@@ -12,6 +12,7 @@
 #define CATAPULT_MOTOR 11
 #define INTAKE_MOTOR 20
 #define CHAINBAR_MOTOR 13
+#define FLIPPER_MOTOR 12
 #define A 1
 #define B 2
 #define C 3
@@ -29,10 +30,8 @@ pros::Motor cat(CATAPULT_MOTOR);
 pros::Motor intake(INTAKE_MOTOR);
 pros::ADIAnalogIn cat_pot(D);
 
-pros::Motor flipper(12);
-pros::Motor cBar(13);
-
-pros::Motor cap_scorer(CHAINBAR_MOTOR);
+pros::Motor flipper(FLIPPER_MOTOR);
+pros::Motor cBar(CHAINBAR_MOTOR);
 
 Ball_System ball_system;
 Lift_Systems lift;
@@ -51,6 +50,8 @@ void initialize() {
 
 	flipper.set_brake_mode(MOTOR_BRAKE_BRAKE);
 	cBar.set_brake_mode(MOTOR_BRAKE_BRAKE);
+
+	gyro.reset();
 }
 
 void disabled() {}

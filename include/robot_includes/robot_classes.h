@@ -9,7 +9,7 @@
 #define CAT_LOADING_MIN_VAL 1490
 
 
-enum Auto_Function_Var {
+enum Auto_Function {
   COMPLETE,
   INCOMPLETE,
   FLAGGED
@@ -28,9 +28,23 @@ public:
   void setLeftPower(int power);
   void setRightPower(int power);
 
+  void reset_drive_sensors(bool reset_gyro);
+  Auto_Function PID_drive(int target, int max_power);
+  Auto_Function PID_turn(int target, int max_power);
+
+  int right_pos();
+  int left_pos();
+
   void drive();
+  int drive_step;
+  int turn_step;
+  void reset_chassis_auto_vars();
 private:
   int direction;
+  PID drive_pid;
+  PID turn_pid;
+  int gyro_error;
+
 };
 
 

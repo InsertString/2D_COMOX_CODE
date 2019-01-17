@@ -22,6 +22,21 @@ const unsigned int TrueSpeedArray[128] = {
 
 Chassis::Chassis() {
   direction = INTAKE_FORWARD;
+  drive_pid.set_Constants(0.146, 1, 2);
+  turn_pid.set_Constants(0.15, 1, 10);
+  drive_step = 0;
+  turn_step = 0;
+}
+
+
+
+void Chassis::reset_drive_sensors(bool reset_gyro) {
+  if (reset_gyro == true) {
+    gyro.reset();
+  }
+
+  drive_RF.tare_position();
+  drive_LF.tare_position();
 }
 
 
@@ -37,6 +52,121 @@ void Chassis::setRightPower(int power) {
   drive_RB = power;
   drive_RF = power;
 }
+
+
+
+
+
+int Chassis::left_pos() {
+  return drive_LF.get_position();
+}
+
+
+
+
+int Chassis::right_pos() {
+  return drive_RF.get_position();
+}
+
+
+
+
+
+Auto_Function Chassis::PID_drive(int target, int max_power) {
+  Auto_Function return_state = INCOMPLETE;
+
+  switch(drive_step) {
+    case 0 :
+    //set default values//
+    reset_drive_sensors(true);
+    drive_pid.set_pid_vars(target, 9, true, 9);
+    gyro_error = 0;
+    return_state = INCOMPLETE;
+    //reset timers//
+    resetTimer(DRIVE_PID_EXIT);
+    resetTimer(DRIVE_PID_TIMEOUT);
+    //increase step//
+    drive_step++;
+    break;
+    case 1 :
+    //set gyro error
+    gyro_error = 0 - gyro.get_value();
+
+    int out_L;
+    int out_R;
+
+    out_L = -drive_pid.output(right_pos(), max_power) - (gyro_error * 0.7);
+    out_R = -drive_pid.output(right_pos(), max_power) + (gyro_error * 0.7);
+
+    setLeftPower(out_L);
+    setRightPower(out_R);
+
+    if (abs(drive_pid.error) < 100 || getTime(DRIVE_PID_TIMEOUT) > 2000) {
+      if (getTime(DRIVE_PID_EXIT) > 50) drive_step++;
+    }
+    else
+      resetTimer(DRIVE_PID_EXIT);
+
+    break;
+    case 2 :
+    setLeftPower(0);
+    setRightPower(0);
+		return_state = COMPLETE;
+    break;
+  }
+
+  return return_state;
+}
+
+
+
+
+
+Auto_Function Chassis::PID_turn(int target, int max_power) {
+  Auto_Function return_state = INCOMPLETE;
+
+  switch(turn_step) {
+    case 0 :
+    //set default values//
+    reset_drive_sensors(true);
+    turn_pid.set_pid_vars(target, 11, true, 11);
+    return_state = INCOMPLETE;
+    //reset timers//
+    resetTimer(TURN_PID_EXIT);
+    resetTimer(TURN_PID_TIMEOUT);
+    //increase step//
+    turn_step++;
+    break;
+    case 1 :
+    int out_L;
+    int out_R;
+
+    out_L = -turn_pid.output(right_pos(), max_power);
+    out_R = turn_pid.output(right_pos(), max_power);
+
+    setLeftPower(out_L);
+    setRightPower(out_R);
+
+    if (abs(turn_pid.error) < 100 || getTime(TURN_PID_TIMEOUT) > 2000) {
+      if (getTime(DRIVE_PID_EXIT) > 50) turn_step++;
+    }
+    else
+      resetTimer(TURN_PID_EXIT);
+
+    break;
+    case 2 :
+    setLeftPower(0);
+    setRightPower(0);
+		return_state = COMPLETE;
+    break;
+  }
+
+  return return_state;
+}
+
+
+
+
 
 
 
