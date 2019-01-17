@@ -6,6 +6,9 @@
 
 Ball_System::Ball_System() {
   target = IDLE;
+  Cat_target = 1590;
+  shoot_step = 0;
+  pull_back_step = 0;
 }
 
 
@@ -80,11 +83,45 @@ void Ball_System::setCatPosition() {
 
 
 
+
+
+Auto_Function Ball_System::shoot() {
+  Auto_Function return_state = INCOMPLETE;
+
+  switch (shoot_step) {
+    case 0 :
+    if (cat_pot.get_value() > 1200) {
+      setCatpower(127);
+    }
+    else {
+      setCatpower(0);
+      shoot_step++;
+    }
+    break;
+    case 1 :
+    if (cat_pot.get_value() < 1449) {
+      setCatpower(127);
+    }
+    else {
+      setCatpower(0);
+      shoot_step++;
+    }
+    break;
+    case 2 :
+    return_state = COMPLETE;
+    break;
+  }
+
+  return return_state;
+}
+
+
+
+
 int a = 2;
 int b = 0;
 void Ball_System::drive() {
   //setCatPosition();
-  Cat_target = 1590;
   int power = (Cat_target - cat_pot.get_value()) * 1;
 
   if (master.get_digital(DIGITAL_R2)) {

@@ -147,7 +147,7 @@ Auto_Function Chassis::PID_turn(int target, int max_power) {
     setLeftPower(out_L);
     setRightPower(out_R);
 
-    if (abs(turn_pid.error) < 100 || getTime(TURN_PID_TIMEOUT) > 2000) {
+    if (abs(turn_pid.error) < 30 || getTime(TURN_PID_TIMEOUT) > 2000) {
       if (getTime(DRIVE_PID_EXIT) > 50) turn_step++;
     }
     else

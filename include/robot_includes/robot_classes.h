@@ -73,10 +73,17 @@ public:
   void setCatPosition();
   Cat_Positions current_cat_position();
 
+  Auto_Function shoot();
+  Auto_Function pull_back();
+  int shoot_step;
+  int pull_back_step;
+
   void drive();
 private:
   Cat_Positions target;
   int Cat_target;
+
+
 };
 
 #endif
