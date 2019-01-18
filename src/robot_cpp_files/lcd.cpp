@@ -67,13 +67,22 @@ void lcd_control() {
   }
   else if (page == SENSOR_VALUES) {
     pros::lcd::print(0, "SENSOR VALUES");
-
+    pros::lcd::print(1, "cat_pot : [%d]", cat_pot.get_value());
+		pros::lcd::print(2, "cBar position : [%d]", cBar.get_position());
+		pros::lcd::print(3, "flipper : [%d]", flipper.get_position());
+		pros::lcd::print(4, "gyro val :[%4.0f]", gyro.get_value());
+		pros::lcd::print(5, "drive encoder value : [%d]", chassis.right_pos());
     pros::lcd::print(5, "<< AUTO SELECTION || MOTOR TEMPS >>");
   }
   else if (page == MOTOR_TEMPS) {
     pros::lcd::print(0, "MOTOR TEMPURATURES");
-
-    pros::lcd::print(9, "<< SENSOR VALUES || AUTO SELECTION >>");
+    pros::lcd::print(1, "catapult : [%2.0f]", cat.get_temperature());
+    pros::lcd::print(2, "intake : [%2.0f]", intake.get_temperature());
+    pros::lcd::print(3, "flipper : [%2.0f]", flipper.get_temperature());
+    pros::lcd::print(4, "chainbar : [%2.0f]", cBar.get_temperature());
+    pros::lcd::print(5, "average left drive : [%2.0f]", (drive_LF.get_temperature() + drive_LB.get_temperature())/2);
+    pros::lcd::print(6, "average right drive : [%2.0f]", (drive_RF.get_temperature() + drive_RB.get_temperature())/2);
+    pros::lcd::print(7, "<< SENSOR VALUES || AUTO SELECTION >>");
   }
 
   if (LCD_left_pressed()) {

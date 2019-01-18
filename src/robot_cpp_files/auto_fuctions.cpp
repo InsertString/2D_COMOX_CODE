@@ -63,14 +63,19 @@ void flag_auto(int colour) {
     }
     break;
     case 2 :
-    a = chassis.PID_turn(900, 100);
+    int turn_amount;
+    if (colour == RED) turn_amount = 900;
+    else if (colour == BLUE) turn_amount = -900;
+    a = chassis.PID_turn(turn_amount, 100);
     if (a == COMPLETE) b = ball_system.shoot();
     if ((a == COMPLETE && b == COMPLETE) || getTime(AUTO_STEP_TIMEOUT)) {
       advance_auto_step();
     }
     break;
     case 3 :
-    a = chassis.PID_turn(1800, 127);
+    if (colour == RED) turn_amount = 900;
+    else if (colour == BLUE) turn_amount = -900;
+    a = chassis.PID_turn(turn_amount, 127);
     if (a == COMPLETE || getTime(3000)) {
       ball_system.setIntakePower(127);
       advance_auto_step();
