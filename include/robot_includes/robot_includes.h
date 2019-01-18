@@ -4,5 +4,6 @@
 #include "pid.h"
 #include "timing.h"
 #include "robot_classes.h"
+#include "lcd.h"
 
 #endif

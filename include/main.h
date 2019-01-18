@@ -34,6 +34,7 @@
  */
 #define PROS_USE_LITERALS
 
+#include "sys/string.h"
 #include "api.h"
 #include "robot_includes/robot_includes.h"
 

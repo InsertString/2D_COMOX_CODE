@@ -22,8 +22,8 @@ const unsigned int TrueSpeedArray[128] = {
 
 Chassis::Chassis() {
   direction = INTAKE_FORWARD;
-  drive_pid.set_Constants(0.146, 1, 2);
-  turn_pid.set_Constants(0.15, 1, 10);
+  drive_pid.set_Constants(0.19, 1, 2);
+  turn_pid.set_Constants(0.2, 1, 15);
   drive_step = 0;
   turn_step = 0;
 }
@@ -37,6 +37,14 @@ void Chassis::reset_drive_sensors(bool reset_gyro) {
 
   drive_RF.tare_position();
   drive_LF.tare_position();
+}
+
+
+
+void Chassis::reset_chassis_auto_vars() {
+	reset_drive_sensors(false);
+	drive_step = 0;
+  turn_step = 0;
 }
 
 
@@ -79,7 +87,7 @@ Auto_Function Chassis::PID_drive(int target, int max_power) {
     case 0 :
     //set default values//
     reset_drive_sensors(true);
-    drive_pid.set_pid_vars(target, 9, true, 9);
+    drive_pid.set_pid_vars(target, 15, true, 9);
     gyro_error = 0;
     return_state = INCOMPLETE;
     //reset timers//
@@ -95,8 +103,8 @@ Auto_Function Chassis::PID_drive(int target, int max_power) {
     int out_L;
     int out_R;
 
-    out_L = -drive_pid.output(right_pos(), max_power) - (gyro_error * 0.7);
-    out_R = -drive_pid.output(right_pos(), max_power) + (gyro_error * 0.7);
+    out_L = drive_pid.output(right_pos(), max_power) - (gyro_error * 0.7);
+    out_R = drive_pid.output(right_pos(), max_power) + (gyro_error * 0.7);
 
     setLeftPower(out_L);
     setRightPower(out_R);
@@ -141,13 +149,13 @@ Auto_Function Chassis::PID_turn(int target, int max_power) {
     int out_L;
     int out_R;
 
-    out_L = -turn_pid.output(right_pos(), max_power);
-    out_R = turn_pid.output(right_pos(), max_power);
+    out_L = -turn_pid.output(gyro.get_value(), max_power);
+    out_R = turn_pid.output(gyro.get_value(), max_power);
 
     setLeftPower(out_L);
     setRightPower(out_R);
 
-    if (abs(turn_pid.error) < 30 || getTime(TURN_PID_TIMEOUT) > 2000) {
+    if (abs(turn_pid.error) < 20 || getTime(TURN_PID_TIMEOUT) > 2000) {
       if (getTime(DRIVE_PID_EXIT) > 50) turn_step++;
     }
     else
