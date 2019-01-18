@@ -101,4 +101,6 @@ extern Chassis chassis;
 
 extern pros::ADIGyro gyro;
 
+extern int selected_auto;
+
 #endif  // _PROS_MAIN_H_

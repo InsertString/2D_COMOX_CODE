@@ -5,8 +5,6 @@
 #define SENSOR_VALUES 1
 #define MOTOR_TEMPS 2
 
-//int page;
-
 void lcd_control();
 
 void set_auto();

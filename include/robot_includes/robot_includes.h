@@ -5,5 +5,6 @@
 #include "timing.h"
 #include "robot_classes.h"
 #include "lcd.h"
+#include "auto_functions.h"
 
 #endif

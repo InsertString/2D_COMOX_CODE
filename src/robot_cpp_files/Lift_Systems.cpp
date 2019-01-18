@@ -9,7 +9,7 @@
 #define RIGHT 4
 #define NONE 0
 
-#define SCORING -1950
+#define SCORING -1850
 #define LIFTING -4150
 #define GRABBING -280
 
