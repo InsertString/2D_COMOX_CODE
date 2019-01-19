@@ -6,8 +6,8 @@
 
 int auto_step;
 
-Auto_Function a;
-Auto_Function b;
+Auto_Function i;
+Auto_Function f;
 Auto_Function c;
 
 
@@ -36,7 +36,7 @@ void advance_auto_step() {
   auto_step++;
   reset_auto_variables();
   resetTimer(AUTO_STEP_TIMEOUT);
-  a = b = c = INCOMPLETE;
+  i = f = c = INCOMPLETE;
 }
 
 
@@ -48,41 +48,38 @@ void flag_auto(int colour) {
     case 0 :
     ball_system.setIntakePower(127);
     lift.setFlipperPower(3);
-    a = chassis.PID_drive(3000, 100);
-    if (a == COMPLETE || getTime(AUTO_STEP_TIMEOUT) > 2000) {
+    i = chassis.PID_drive(3000, 100);
+    if (i == COMPLETE || getTime(AUTO_STEP_TIMEOUT) > 2000) {
       advance_auto_step();
     }
     break;
     case 1 :
     if (getTime(AUTO_STEP_TIMEOUT) > 500) {
-      ball_system.setIntakePower(50);
-      a = chassis.PID_drive(-3000, 100);
-      if (a == COMPLETE || getTime(AUTO_STEP_TIMEOUT) > 3000) {
+      i = chassis.PID_drive(-2900, 100);
+      if (i == COMPLETE || getTime(AUTO_STEP_TIMEOUT) > 3000) {
         advance_auto_step();
       }
     }
     break;
     case 2 :
-    int turn_amount;
-    if (colour == RED) turn_amount = 900;
-    else if (colour == BLUE) turn_amount = -900;
-    a = chassis.PID_turn(turn_amount, 100);
-    if (a == COMPLETE) b = ball_system.shoot();
-    if ((a == COMPLETE && b == COMPLETE) || getTime(AUTO_STEP_TIMEOUT)) {
+    ball_system.setIntakePower(0);
+    i = chassis.PID_turn(880, 100);
+    if (i == COMPLETE) {
       advance_auto_step();
     }
     break;
     case 3 :
-    if (colour == RED) turn_amount = 900;
-    else if (colour == BLUE) turn_amount = -900;
-    a = chassis.PID_turn(turn_amount, 127);
-    if (a == COMPLETE || getTime(3000)) {
-      ball_system.setIntakePower(127);
-      advance_auto_step();
+    f = chassis.PID_drive(-500, 70);
+    if (f == COMPLETE) {
+      i = ball_system.shoot();
+      if (i == COMPLETE) {
+        advance_auto_step();
+      }
     }
     break;
     case 4 :
-    a = chassis.PID_drive(3000, 100);
+    i = chassis.PID_turn(1800, 127);
+    ball_system.setIntakePower(127);
     break;
   }
 }

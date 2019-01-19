@@ -28,13 +28,15 @@ void opcontrol() {
 
 		ball_system.drive();
 
+		lcd_control();
+/*
 		pros::lcd::print(0, "cat_pot %d", cat_pot.get_value());
 		pros::lcd::print(1, "cat temp : %f", cat.get_temperature());
 		pros::lcd::print(2, "cBar position : %d", cBar.get_position());
 		pros::lcd::print(3, "flipper : %d", flipper.get_position());
 		pros::lcd::print(4, "gyro val : %f", gyro.get_value());
 		pros::lcd::print(5, "drive encoder value : %d", chassis.right_pos());
-
+*/
 		pros::delay(20);
 	}
 }

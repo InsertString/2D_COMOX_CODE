@@ -1,8 +1,3 @@
-
-
-
-
-
 #include "main.h"
 
 #define LEFT_FRONT_MOTOR 16
@@ -50,8 +45,8 @@ void initialize() {
 
 	flipper.set_brake_mode(MOTOR_BRAKE_BRAKE);
 	cBar.set_brake_mode(MOTOR_BRAKE_BRAKE);
-
-	gyro.reset();
+	selected_auto = 0;
+	reset_auto_variables();
 }
 
 void disabled() {}
