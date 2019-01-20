@@ -99,7 +99,7 @@ Auto_Function Ball_System::shoot() {
     }
     break;
     case 1 :
-    if (cat_pot.get_value() < 1449) {
+    if (cat_pot.get_value() < 1500) {
       setCatpower(127);
     }
     else {
@@ -131,7 +131,7 @@ void Ball_System::drive() {
   }
   else if (!master.get_digital(DIGITAL_R1)) {
     a = 2;
-    if (cat_pot.get_value() < 1449 && b == 1) {
+    if (cat_pot.get_value() < 1485 && b == 1) {
       setCatpower(power);
     }
     else {

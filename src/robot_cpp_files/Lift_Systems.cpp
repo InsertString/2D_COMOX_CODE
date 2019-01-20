@@ -99,7 +99,7 @@ void Lift_Systems::drive() {
     }
     else if (curr_system == FLIPPER) {
       if (flipper_state == UP) {
-        setFlipperPower(3);
+        setFlipperPower(6);
       }
       else if (flipper_state == DOWN) {
         setFlipperPower(-3);

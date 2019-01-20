@@ -62,8 +62,15 @@ void flag_auto(int colour) {
     }
     break;
     case 2 :
+    int a;
+    if (colour == RED) {
+      a = 880;
+    }
+    else if (colour == BLUE) {
+      a = -880;
+    }
     ball_system.setIntakePower(0);
-    i = chassis.PID_turn(880, 100);
+    i = chassis.PID_turn(a, 100);
     if (i == COMPLETE) {
       advance_auto_step();
     }
@@ -78,8 +85,20 @@ void flag_auto(int colour) {
     }
     break;
     case 4 :
-    i = chassis.PID_turn(1800, 127);
+    if (colour == RED) {
+      a = 1900;
+    }
+    else if (colour == BLUE) {
+      a = -1900;
+    }
+    i = chassis.PID_turn(a, 127);
     ball_system.setIntakePower(127);
+    if (i == COMPLETE) {
+      advance_auto_step();
+    }
+    break;
+    case 5 :
+    i = chassis.PID_drive(3000, 100);
     break;
   }
 }
